@@ -33,6 +33,6 @@ urlpatterns = [
     url(r'^api/auth/token/obtain/$', TokenObtainPairView.as_view()),
     url(r'^api/auth/token/refresh/$', TokenRefreshView.as_view()),
     url(r'^api/echo/$', EchoView.as_view()),
-	path('chat/',include('ws_player.urls')),
+	path('stream/',include('ws_player.urls')),
 
 ]
