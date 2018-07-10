@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'profiles_api',
+    'channels',
+    'ws_player',
 ]
 
 MIDDLEWARE = [
@@ -109,6 +111,18 @@ REST_FRAMEWORK = {
     ),
 }
 
+ASGI_APPLICATION = 'config.routing.application'
+
+ASGI_APPLICATION = 'config.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
+
 #SIMPLE_JWT = {
 #   'ACCESS_TOKEN_LIFETIME': timedelta(days=365),
 #   'REFRESH_TOKEN_LIFETIME': timedelta(days=365),
@@ -130,4 +144,3 @@ REST_FRAMEWORK = {
 #    'SLIDING_TOKEN_LIFETIME': timedelta(days=365),
 #    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=365),
 #}
-

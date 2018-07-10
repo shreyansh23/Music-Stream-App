@@ -10,6 +10,7 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from django.urls import path
 
 router = routers.DefaultRouter()
 router.register(r'users', profiles_api_views.UserViewSet)
@@ -31,5 +32,7 @@ urlpatterns = [
     url(r'^api/auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/auth/token/obtain/$', TokenObtainPairView.as_view()),
     url(r'^api/auth/token/refresh/$', TokenRefreshView.as_view()),
-    url(r'^api/echo/$', EchoView.as_view())
+    url(r'^api/echo/$', EchoView.as_view()),
+	path('chat/',include('ws_player.urls')),
+
 ]
