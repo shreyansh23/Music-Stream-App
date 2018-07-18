@@ -19,6 +19,7 @@
     "redux-api-middleware": "^2.0.0-beta.3",
     "redux-persist": "^5.0.0-beta.7",
     "redux-persist-transform-filter": "0.0.15",
+    "screenfull": "^3.3.2",
     "youtube-api-search": "0.0.5"
   },
   "scripts": {
