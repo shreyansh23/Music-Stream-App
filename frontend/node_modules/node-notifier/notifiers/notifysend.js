@@ -25,7 +25,8 @@ function NotifySend(options) {
 }
 util.inherits(NotifySend, EventEmitter);
 
-function noop() {}
+function noop() {
+}
 NotifySend.prototype.notify = function(options, callback) {
   options = utils.clone(options || {});
   callback = callback || noop;
@@ -72,7 +73,7 @@ NotifySend.prototype.notify = function(options, callback) {
   return this;
 };
 
-var allowedArguments = ['urgency', 'expire-time', 'icon', 'category', 'hint'];
+var allowedArguments = [ 'urgency', 'expire-time', 'icon', 'category', 'hint' ];
 
 function doNotification(options, callback) {
   var initial, argsList;
@@ -80,7 +81,7 @@ function doNotification(options, callback) {
   options = utils.mapToNotifySend(options);
   options.title = options.title || 'Node Notification:';
 
-  initial = [options.title, options.message];
+  initial = [ options.title, options.message ];
   delete options.title;
   delete options.message;
 

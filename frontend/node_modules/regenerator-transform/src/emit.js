@@ -601,7 +601,7 @@ Ep.explodeStatement = function(path, labelId) {
     }
 
     let discriminant = path.get("discriminant");
-    util.replaceWithOrRemove(discriminant, condition);
+    discriminant.replaceWith(condition);
     self.jump(self.explodeExpression(discriminant));
 
     self.leapManager.withEntry(
@@ -749,7 +749,7 @@ Ep.explodeStatement = function(path, labelId) {
 let catchParamVisitor = {
   Identifier: function(path, state) {
     if (path.node.name === state.catchParamName && util.isReference(path)) {
-      util.replaceWithOrRemove(path, state.safeParam);
+      path.replaceWith(state.safeParam);
     }
   },
 

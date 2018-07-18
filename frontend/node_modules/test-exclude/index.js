@@ -85,9 +85,9 @@ TestExclude.prototype.shouldInstrument = function (filename, relFile) {
 
   return (
     !this.include ||
-    micromatch.any(pathToCheck, this.include, {dot: true})) &&
-    (!micromatch.any(pathToCheck, this.exclude, {dot: true}) ||
-     micromatch.any(pathToCheck, this.excludeNegated, {dot: true}))
+    micromatch.any(pathToCheck, this.include, {dotfiles: true})) &&
+    (!micromatch.any(pathToCheck, this.exclude, {dotfiles: true}) ||
+     micromatch.any(pathToCheck, this.excludeNegated, {dotfiles: true}))
 }
 
 TestExclude.prototype.pkgConf = function (key, path) {
@@ -125,10 +125,9 @@ var exportFunc = function (opts) {
 
 exportFunc.defaultExclude = [
   'coverage/**',
-  'packages/*/test/**',
   'test/**',
   'test{,-*}.js',
-  '**/*{.,-}test.js',
+  '**/*.test.js',
   '**/__tests__/**',
   '**/node_modules/**'
 ]

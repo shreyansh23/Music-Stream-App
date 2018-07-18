@@ -1,29 +1,7 @@
 # Change Log
 
 All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
-
-<a name="4.2.1"></a>
-## [4.2.1](https://github.com/istanbuljs/istanbuljs/compare/test-exclude@4.2.0...test-exclude@4.2.1) (2018-03-04)
-
-
-### Bug Fixes
-
-* upgrade micromatch ([#142](https://github.com/istanbuljs/istanbuljs/issues/142)) ([24104a7](https://github.com/istanbuljs/istanbuljs/commit/24104a7))
-
-
-
-
-<a name="4.2.0"></a>
-# [4.2.0](https://github.com/istanbuljs/istanbuljs/compare/test-exclude@4.1.1...test-exclude@4.2.0) (2018-02-13)
-
-
-### Features
-
-* add additional patterns to default excludes ([#133](https://github.com/istanbuljs/istanbuljs/issues/133)) ([4cedf63](https://github.com/istanbuljs/istanbuljs/commit/4cedf63))
-
-
-
+See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
 <a name="4.1.1"></a>
 ## [4.1.1](https://github.com/istanbuljs/istanbuljs/compare/test-exclude@4.1.0...test-exclude@4.1.1) (2017-05-27)

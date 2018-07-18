@@ -9,7 +9,6 @@
  */
 
 import * as t from "babel-types";
-import * as util from "./util";
 let hasOwn = Object.prototype.hasOwnProperty;
 
 // The hoist function takes a FunctionExpression or FunctionDeclaration
@@ -58,7 +57,7 @@ exports.hoist = function(funPath) {
         } else {
           // We don't need to traverse this expression any further because
           // there can't be any new declarations inside an expression.
-          util.replaceWithOrRemove(path, t.expressionStatement(expr));
+          path.replaceWith(t.expressionStatement(expr));
         }
 
         // Since the original node has been either removed or replaced,
@@ -70,14 +69,14 @@ exports.hoist = function(funPath) {
     ForStatement: function(path) {
       let init = path.node.init;
       if (t.isVariableDeclaration(init)) {
-        util.replaceWithOrRemove(path.get("init"), varDeclToExpr(init, false));
+        path.get("init").replaceWith(varDeclToExpr(init, false));
       }
     },
 
     ForXStatement: function(path) {
       let left = path.get("left");
       if (left.isVariableDeclaration()) {
-        util.replaceWithOrRemove(left, varDeclToExpr(left.node, true));
+        left.replaceWith(varDeclToExpr(left.node, true));
       }
     },
 
@@ -111,7 +110,7 @@ exports.hoist = function(funPath) {
         // If the parent node is not a block statement, then we can just
         // replace the declaration with the equivalent assignment form
         // without worrying about hoisting it.
-        util.replaceWithOrRemove(path, assignment);
+        path.replaceWith(assignment);
       }
 
       // Don't hoist variables out of inner functions.

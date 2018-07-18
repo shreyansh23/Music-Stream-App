@@ -1,6 +1,4 @@
 'use strict';
-const pTry = require('p-try');
-
 module.exports = concurrency => {
 	if (concurrency < 1) {
 		throw new TypeError('Expected `concurrency` to be a number from 1 and up');
@@ -21,7 +19,7 @@ module.exports = concurrency => {
 		const run = () => {
 			activeCount++;
 
-			pTry(fn).then(
+			fn().then(
 				val => {
 					resolve(val);
 					next();
