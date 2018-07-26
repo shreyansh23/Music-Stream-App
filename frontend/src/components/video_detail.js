@@ -4,13 +4,17 @@ import { findDOMNode } from 'react-dom'
 //import { hot } from 'react-hot-loader'
 import screenfull from 'screenfull'
 import Duration from './../Duration'
+import StreamController from './streamController'
+import { streamSocket } from '../webSocket.js';
+
+
 
 class VideoDetail extends React.Component{
   constructor(props) {
   super(props);
   this.state = {
     url: "",
-    play: false,
+    play:false,
     mute: false,
     duration: 0,
     seek: 0,
@@ -24,24 +28,7 @@ load = url => {
     played: 0,
     loaded: 0
   })
-}
-playPause = () => {
-  this.setState({ playing: !this.state.playing })
-}
-stop = () => {
-  this.setState({ url: null, playing: false })
-}
-toggleLoop = () => {
-  this.setState({ loop: !this.state.loop })
-}
-setVolume = e => {
-  this.setState({ volume: parseFloat(e.target.value) })
-}
-toggleMuted = () => {
-  this.setState({ muted: !this.state.muted })
-}
-setPlaybackRate = e => {
-  this.setState({ playbackRate: parseFloat(e.target.value) })
+
 }
 onPlay = () => {
 //console.log('onPlay')
@@ -51,16 +38,7 @@ onPause = () => {
 //  console.log('onPause')
   this.setState({ playing: false })
 }
-onSeekMouseDown = e => {
-  this.setState({ seeking: true })
-}
-onSeekChange = e => {
-  this.setState({ played: parseFloat(e.target.value) })
-}
-onSeekMouseUp = e => {
-  this.setState({ seeking: false })
-  this.player.seekTo(parseFloat(e.target.value))
-}
+
 onProgress = state => {
   //console.log('onProgress', state)
   // We only want to update time slider if we are not currently seeking
@@ -104,39 +82,29 @@ ref = player => {
   const link = "https://www.youtube.com/watch?v=" + videoId;
   console.log(link);
 
+  let data = {
+        url: link,
+        play: true,
+        mute: false,
+        duration: 0,
+        seek: 0,
+        volume: 100,
+    }
+    streamSocket.send(JSON.stringify(data));
+    console.log("click video");
+
+
   return (
     <div className="video-detail col-md-8">
       <div className = "embed-responsive embed-responsive-16by9">
-        <ReactPlayer
-            ref={this.ref}
-            className='react-player'
-            width='100%'
-            height='100%'
-            url={link}
-
-            playing={playing}
-            loop={loop}
-            playbackRate={playbackRate}
-            volume={volume}
-            muted={muted}
-            //onReady={() => console.log('onReady')}
-            //onStart={() => console.log('onStart')}
-            onPlay={this.onPlay}
-            onPause={this.onPause}
-            //onBuffer={() => console.log('onBuffer')}
-            //onSeek={e => console.log('onSeek', e)}
-            onEnded={this.onEnded}
-            //onError={e => console.log('onError', e)}
-            onProgress={this.onProgress}
-            onDuration={this.onDuration}
-          />
+        <h1>HelloWorld</h1>
       </div>
 
       <div className="details">
         <div>{video.snippet.title}</div>
         <div>{video.snippet.description}</div>
       </div>
-
+      <hr/>
       <div id="controls">
         <table><tbody>
               <tr>
@@ -194,6 +162,10 @@ ref = player => {
               </tr>
             </tbody></table>
       </div>
+      <hr/>
+      <StreamController/>
+
+
 
     </div>
   );

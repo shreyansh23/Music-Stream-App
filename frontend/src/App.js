@@ -33,6 +33,7 @@ import YTSearch from 'youtube-api-search';
 import SearchBar from './components/search_bar';
 import VideoList from './components/video_list';
 import VideoDetail from './components/video_detail';
+import streamController from './components/streamController'
 
 const API_KEY = 'AIzaSyB5X9G5TCpeG8Hh3Jv6Fb4PCeviqgpEzhk';
 
@@ -67,6 +68,7 @@ export default class App extends Component {
         <VideoList
           onVideoSelect = {selectedVideo => this.setState({selectedVideo})}
           videos = { this.state.videos } />
+        <streamController/>
       </div>
     );
   }

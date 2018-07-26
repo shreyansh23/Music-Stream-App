@@ -4,10 +4,11 @@ const VideoListItem = ({video, onVideoSelect}) => {   // instead of passing prop
   //{video} is same as defining, const video = props.video  This is a ES6 syntax.
 
   const imageUrl = video.snippet.thumbnails.default.url;
+  
 
   return (
     <li onClick={() => onVideoSelect(video)} className="list-group-item">
-      <div className="video-list media">
+      <div className="video-list media"class="video-list media" onClick={this.handleClick}>
         <div className="media-left">
           <img className="media-object" src={imageUrl} />
         </div>
