@@ -82,6 +82,7 @@ ref = player => {
   const link = "https://www.youtube.com/watch?v=" + videoId;
   console.log(link);
 
+  handleClick = () =>{
   let data = {
         url: link,
         play: true,
@@ -92,7 +93,7 @@ ref = player => {
     }
     streamSocket.send(JSON.stringify(data));
     console.log("click video");
-
+  }
 
   return (
     <div className="video-detail col-md-8">

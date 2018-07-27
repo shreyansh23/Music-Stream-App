@@ -151,7 +151,7 @@ handleMute = () => {
         <input type="range" name="seek" min="0" max={this.state.duration} value={this.state.seek} onChange={this.handleSeek} className='seek-slider' />
         Volume
         <input type="range" name="volume" min="-1" max="100" value={this.state.volume} className='volume-slider' onChange={this.handleVolume} />
-        <input id='muted' type='checkbox' checked={mute} onChange={this.handleMute} />
+        Mute<input id='muted' type='checkbox' checked={mute} onChange={this.handleMute} />
 
 
       </div>
