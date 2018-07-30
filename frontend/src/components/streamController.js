@@ -1,14 +1,11 @@
 import React from 'react';
 import { streamSocket } from '../webSocket.js';
-import { findDOMNode } from 'react-dom'
-import screenfull from 'screenfull'
-
 
 export default class StreamController extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: "",
+      url: "https://www.youtube.com/watch?v=Dx8J125s4cg",
       play: false,
       mute: false,
       duration: 0,
@@ -16,99 +13,49 @@ export default class StreamController extends React.Component {
       volume: 100,
     };
   }
-
+  send_data = (e) =>{
+    let data = {
+      url: this.state.url,
+      play: this.state.play,
+      mute: this.state.mute,
+      duration: this.state.duration,
+      seek: this.state.seek,
+      volume: this.state.volume,
+    }
+    streamSocket.send(JSON.stringify(data));
+  }
 
   handlePlay = () => {
-    this.setState({
-      play: !this.state.play,
-    }, () => {
-        let data = {
-          url: this.state.url,
-          play: this.state.play,
-          mute: this.state.mute,
-          duration: this.state.duration,
-          seek: this.state.seek,
-          volume: this.state.volume,
-        }
-        streamSocket.send(JSON.stringify(data));
-      });
-   console.log("handlePlay")
-    }
+      this.setState({play: !this.state.play}, () => {this.send_data()});
+  }
 
-    handleSeek = (e) => {
-  this.setState({
-    seek: e.target.value,
-  }, () => {
-      let data = {
-        url: this.state.url,
-        mute: this.state.mute,
-        play: this.state.play,
-        duration: this.state.duration,
-        seek: this.state.seek,
-        volume: this.state.volume,
-      };
-      streamSocket.send(JSON.stringify(data));
-    });
-  console.log("handleSeek");
-}
-handleVolume = (e) => {
- this.setState({
-   volume: e.target.value,
- }, () => {
-      let data = {
-        url: this.state.url,
-        mute: this.state.mute,
-        play: this.state.play,
-        duration: this.state.duration,
-        seek: this.state.seek,
-        volume: this.state.volume,
-      };
-      streamSocket.send(JSON.stringify(data));
-    });
-  console.log(this.state.volume);
-}
-handleMute = () => {
-  this.setState({
-    mute: !this.state.mute,
-  }, () => {
-      let data = {
-        url: this.state.url,
-        mute: this.state.mute,
-        play: this.state.play,
-        duration: this.state.duration,
-        seek: this.state.seek,
-        volume: this.state.volume,
-      };
-      streamSocket.send(JSON.stringify(data));
-    });
- console.log("handleMute");
+  handleSeek = (e) => {
+      this.setState({seek: e.target.value,}, () => {this.send_data()});
+      console.log("handleSeek");
+  }
 
-}
+  handleVolume = (e) => {
+      this.setState({volume: e.target.value,}, () => {this.send_data();});
+      console.log(this.state.volume);
+  }
+
+  handleMute = () => {
+    this.setState({mute: !this.state.mute,}, () => {this.send_data();});
+    console.log("handleMute");
+  }
+
   toggleLoop = () => {
     this.setState({ loop: !this.state.loop })
   }
+
   setVolume = e => {
     this.setState({ volume: parseFloat(e.target.value) })
   }
+
   toggleMuted = () => {
     this.setState({ muted: !this.state.muted })
   }
-  setPlaybackRate = e => {
-    this.setState({ playbackRate: parseFloat(e.target.value) })
-  }
-  onClickFullscreen = () => {
-    screenfull.request(findDOMNode(this.player))
-  }
-  onSeekMouseDown = e => {
-    this.setState({ seeking: true })
-  }
-  onSeekChange = e => {
-    this.setState({ played: parseFloat(e.target.value) })
-  }
-  onSeekMouseUp = e => {
-    this.setState({ seeking: false })
-    this.player.seekTo(parseFloat(e.target.value))
-  }
+
   componentDidMount() {
     streamSocket.onmessage = (e) => {
       let data = JSON.parse(e.data);
@@ -138,21 +85,16 @@ handleMute = () => {
 
     return (
       <div id="wrap">
-
-
-
-      <div  id="stream-controller">
-        <button onClick={this.handlePlay}>{this.state.play ? 'Pause' : 'Play'}</button>
-        Seek
-        <input type="range" name="seek" min="0" max={this.state.duration} value={this.state.seek} onChange={this.handleSeek} className='seek-slider' />
-        Volume
-        <input type="range" name="volume" min="-1" max="100" value={this.state.volume} className='volume-slider' onChange={this.handleVolume} />
-        Mute<input id='muted' type='checkbox' checked={this.state.mute} onChange={this.handleMute} />
-
-
+        <div  id="stream-controller">
+          <button onClick={this.handlePlay}>{this.state.play ? 'Pause' : 'Play'}</button>
+          Seek
+          <input type="range" name="seek" min="0" max={this.state.duration} value={this.state.seek} onChange={this.handleSeek} className='seek-slider' />
+          Volume
+          <input type="range" name="volume" min="-1" max="100" value={this.state.volume} className='volume-slider' onChange={this.handleVolume} />
+          Mute<input id='muted' type='checkbox' checked={this.state.mute} onChange={this.handleMute} />
+        </div>
+        
       </div>
-
-     </div>
     );
   }
 }

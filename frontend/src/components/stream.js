@@ -8,7 +8,7 @@ export default class Stream extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: "https://youtu.be/YuXLN23ZGQo?list=RDzRaoAWEY9Jo",
+      url: "https://www.youtube.com/watch?v=Dx8J125s4cg",
       play: false,
       mute: false,
       duration: 0,

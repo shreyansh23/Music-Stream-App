@@ -30,14 +30,18 @@ export default class App extends Component {
   render() {
 
     const videoSearch = _.debounce((term) => {this.videoSearch(term)}, 400)
+    const myVideo = this.state.selectedVideo;
 
+    if(myVideo) console.log(myVideo.id.videoId);//render keeps on rendering untill all data is fetched
 
     return (
       <div>
         <SearchBar onSearchTermChange = { videoSearch } />
         <VideoDetail video = { this.state.selectedVideo } />
         <VideoList
-          onVideoSelect = {selectedVideo => this.setState({selectedVideo})}
+          onVideoSelect = {selectedVideo => {this.setState({selectedVideo});
+        
+        }}
           videos = { this.state.videos } />
         <streamController/>
       </div>
