@@ -1,34 +1,5 @@
-/*import React, { Component } from 'react';
-import { connect } from 'react-redux'
-
-import {echo} from './actions/echo'
-import {serverMessage} from './reducers'
-import
-class App extends Component {
-  componentDidMount() {
-      this.props.fetchMessage('Hiii!')
-  }
-
-  render() {
-    return (
-      <div>
-        <h2>Welcome to React</h2>
-        <p>
-            {this.props.message}
-        </p>
-      </div>
-    );
-  }
-}
-
-export default connect(
-  state => ({ message: serverMessage(state) }),
-  { fetchMessage: echo }
-)(App);
-*/
 import _ from 'lodash';
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
 import SearchBar from './components/search_bar';
 import VideoList from './components/video_list';
@@ -50,7 +21,7 @@ export default class App extends Component {
   videoSearch(term) {
     YTSearch({key : API_KEY, term: term}, (videos) => {
       this.setState({
-        videos, // this is declared using es6. This literally means this.setState({ videos: videos });
+        videos: videos,
         selectedVideo : videos[0]
        });
     });

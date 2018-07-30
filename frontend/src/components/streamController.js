@@ -1,8 +1,5 @@
 import React from 'react';
-//import moment from 'moment';
 import { streamSocket } from '../webSocket.js';
-//import { Segment, Icon } from 'semantic-ui-react';
-//import './styles/streamController.css';
 import { findDOMNode } from 'react-dom'
 import screenfull from 'screenfull'
 
@@ -134,24 +131,23 @@ handleMute = () => {
     }
          });
     }
-    console.log("componentMount streamCon.js");
+
   }
 
   render() {
 
-    const { url, playing, volume, mute, loop, played, play, loaded, duration, playbackRate } = this.state
     return (
       <div id="wrap">
 
 
 
-      <div inverted id="stream-controller">
-        <button onClick={this.handlePlay}>{play ? 'Pause' : 'Play'}</button>
+      <div  id="stream-controller">
+        <button onClick={this.handlePlay}>{this.state.play ? 'Pause' : 'Play'}</button>
         Seek
         <input type="range" name="seek" min="0" max={this.state.duration} value={this.state.seek} onChange={this.handleSeek} className='seek-slider' />
         Volume
         <input type="range" name="volume" min="-1" max="100" value={this.state.volume} className='volume-slider' onChange={this.handleVolume} />
-        Mute<input id='muted' type='checkbox' checked={mute} onChange={this.handleMute} />
+        Mute<input id='muted' type='checkbox' checked={this.state.mute} onChange={this.handleMute} />
 
 
       </div>

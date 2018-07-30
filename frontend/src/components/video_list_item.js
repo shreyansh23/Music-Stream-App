@@ -1,16 +1,14 @@
 import React from 'react';
 
-const VideoListItem = ({video, onVideoSelect}) => {   // instead of passing props to the Component we can pass object of video prop like - {video}
-  //{video} is same as defining, const video = props.video  This is a ES6 syntax.
+const VideoListItem = ({video, onVideoSelect}) => {
 
   const imageUrl = video.snippet.thumbnails.default.url;
-  
 
   return (
     <li onClick={() => onVideoSelect(video)} className="list-group-item">
-      <div className="video-list media"class="video-list media" onClick={this.handleClick}>
+      <div className="video-list media" onClick={this.handleClick}>
         <div className="media-left">
-          <img className="media-object" src={imageUrl} />
+          <img className="media-object" src={imageUrl} alt="videoImageHere"/>
         </div>
 
         <div className="media-body">
