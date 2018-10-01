@@ -7,9 +7,7 @@ import StreamController from './streamController'
 class VideoDetail extends React.Component{
   constructor(props) {
   super(props);
-  this.state = {
 
-  };
 }
   render(){
     const video = this.props.video;
