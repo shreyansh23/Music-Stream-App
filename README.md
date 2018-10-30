@@ -1,2 +1,2 @@
 # Music-Stream-App
-Music streaming app having DRF - backend and react - frontend and using django channels. 
+Music streaming app using DRF - backend, django channels, react - frontend and youtube data API. 
