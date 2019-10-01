@@ -1,2 +1,2 @@
-- Mritunjay
-- Gupta
+- Shreyansh Jain
+- Mritunjay Gupta
