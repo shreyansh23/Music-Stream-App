@@ -1,2 +1,3 @@
 - Shreyansh Jain
 - Mritunjay Gupta
+- Harshit Khetan
