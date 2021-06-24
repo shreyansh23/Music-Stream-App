@@ -1,2 +1,0 @@
-- Shreyansh Jain
-- Mritunjay Gupta
